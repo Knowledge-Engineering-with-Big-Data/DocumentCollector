@@ -12,13 +12,13 @@ from log import lg
 
 
 import requests
-from Doi import ResultItem,Channel
+from doi.Doi import ResultItem,Channel
 
 
 class ElsevierResultItem(ResultItem):
 
     def __init__(self, title: str, doi: str, link: str, pdfName: str, articleType: str) -> None:
-        super.__init__(title=title,doi=doi)
+        super().__init__(title=title,doi=doi)
         self.link = link
         self.pdfName = pdfName
         self.articleType = articleType
@@ -35,7 +35,6 @@ class ElsevierChannel(Channel):
         Args:
             keyWord (str): the search key word
         """
-        super.__init__()
         self.base_url = 'https://www.sciencedirect.com/search/api?qs={}'.format(
             keyWord)
         self.offset = 0
