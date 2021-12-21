@@ -29,7 +29,7 @@ class Doi:
         results = channel.getSearchResults()
         for item in results:
             self.doi.add(self.__foramtDoi(item.doi))
-            self.__gen_uuid_of_doi(item.doi)
+            self.__gen_uuid_of_doi(doi=item.doi)
 
     def __foramtDoi(self, doi: str) -> str:
         doi = doi.replace('https://doi.org/', '').replace('/doi/', '').replace('full/', '').replace('book/', '')
