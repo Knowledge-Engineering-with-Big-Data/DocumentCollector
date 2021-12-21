@@ -11,7 +11,6 @@ A tool for information extraction from paper which get doi from website using ke
    git clone https://github.com/brillience/DocumentCollector.git
    cd DocumentCollector
    conda install --yes --file requirements.txt
-   conda activate env
    ```
 
 1. Add search key words in settings.py.
