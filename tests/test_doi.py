@@ -40,7 +40,7 @@ class TestDoi(unittest.TestCase):
 
     def test_geosicenceworld(self):
         channel_name = '_GeosicenceWorld'
-        for searchKey in SearchKeys[2:]:
+        for searchKey in SearchKeys:
             doi = Doi()
             doi.searchArticle(channel=GeosicenceWorldChannel(keyWord=searchKey))
             fileName = searchKey + channel_name + '.csv'

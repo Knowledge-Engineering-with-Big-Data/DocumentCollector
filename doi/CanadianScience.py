@@ -42,7 +42,7 @@ class CanadianScienceChannel(Channel):
         url = 'https://cdnsciencepub.com/action/doSearch?AllField={}'.format(self.keyWord)
         html = self.__getHtml(url)
         tree = etree.HTML(text=html)
-        div = tree.xpath("//span[@class='result__count']']")[0].text
+        div = tree.xpath("//span[@class='result__count']")[0].text
         self.task_nums = int(div.strip().replace(',', ''))
         lg.info("Search results: {} nums.".format(self.task_nums))
         pass

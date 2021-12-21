@@ -22,6 +22,7 @@ A tool for information extraction from paper which get doi from website using ke
 2. create main.py
 
    ```python
+   import os
    from doi.Wiley import WileyChannel
    from settings import SearchKeys, SavePath
    
