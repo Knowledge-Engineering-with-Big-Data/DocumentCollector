@@ -16,6 +16,7 @@ A tool for information extraction from paper.
 2. create main.py
     ```python
     from doi.Wiley import WileyChannel
+    from settings import SearchKeys, SavePath
     
     doi = Doi()
     channel_name = '_wiley'
