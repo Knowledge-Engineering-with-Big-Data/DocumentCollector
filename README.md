@@ -40,7 +40,12 @@ A tool for information extraction from paper which get doi from website using ke
 3. Run
 
    ```bash
+   # get doi
    python3 main.py
+   # update to db (optional)
+   cd scripts
+   python3 update_to_db.py
+   
    ```
 
 ## Authors
