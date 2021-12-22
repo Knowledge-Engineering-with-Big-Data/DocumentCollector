@@ -1,13 +1,12 @@
-from doi.Wiley import WileyChannel
-from doi.CanadianScience import CanadianScienceChannel
+from doi.GeosicenceWorld import GeosicenceWorldChannel
 from settings import SearchKeys, SavePath
 from doi.Doi import Doi
 import os
 
-channel_name = '_CanadianScience'
+channel_name = '_GeosicenceWorld'
 for searchKey in SearchKeys:
     doi = Doi()
-    channel = CanadianScienceChannel(keyWord=searchKey)
+    channel = GeosicenceWorldChannel(keyWord=searchKey)
     doi.searchArticle(channel=channel)
     fileName = searchKey + channel_name + '.csv'
     doi.saveDoiUuid(path=os.path.join(SavePath, fileName))

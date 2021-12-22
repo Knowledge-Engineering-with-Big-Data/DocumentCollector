@@ -41,7 +41,11 @@ class Doi:
 
     def saveDoiUuid(self, path: str):
         header = ['doi', 'uuid']
-        rows = [[i, self.uuid[i]] for i in self.doi]
+        rows = []
+        for doi in self.doi:
+            if doi!=None and len(doi)>2:
+                rows.append([doi,self.uuid[doi]])
+        # rows = [[i, self.uuid[i]] for i in self.doi]
         with open(path, 'w', encoding='utf-8', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(header)
