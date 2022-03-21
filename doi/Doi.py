@@ -1,5 +1,6 @@
 from typing import List
 import uuid
+import hashlib
 from collections import defaultdict
 import csv
 
@@ -37,7 +38,11 @@ class Doi:
         return doi
 
     def __gen_uuid_of_doi(self, doi: str) -> None:
-        self.uuid[doi] = str(uuid.uuid3(uuid.NAMESPACE_OID, doi))
+        # self.uuid[doi] = str(uuid.uuid3(uuid.NAMESPACE_OID, doi))
+        md5 = hashlib.md5()
+        md5.update(doi.encode('utf-8'))
+        res = md5.hexdigest()
+        self.uuid[doi] = res
 
     def saveDoiUuid(self, path: str):
         header = ['doi', 'uuid']

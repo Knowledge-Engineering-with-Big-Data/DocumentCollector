@@ -1,4 +1,4 @@
-SearchKeys = ['ooid', 'oolitic', 'oolite']
+SearchKeys = ['limestone','dolomit*']
 SaveFolder = 'results'
 dbName = 'db.sqlite'
 
