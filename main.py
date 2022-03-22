@@ -30,11 +30,11 @@ def GetDoi(searchKey):
     fileName = searchKey + channel_name + '.csv'
     doi.saveDoiUuid(path=os.path.join(SavePath, fileName))
 
-    channel_name = '_WileyChannel'
-    channel = WileyChannel(keyWord=searchKey)
-    doi.searchArticle(channel=channel)
-    fileName = searchKey + channel_name + '.csv'
-    doi.saveDoiUuid(path=os.path.join(SavePath, fileName))
+    # channel_name = '_WileyChannel'
+    # channel = WileyChannel(keyWord=searchKey)
+    # doi.searchArticle(channel=channel)
+    # fileName = searchKey + channel_name + '.csv'
+    # doi.saveDoiUuid(path=os.path.join(SavePath, fileName))
 
 if __name__ =='__main__':
     pool = Pool(len(SearchKeys))

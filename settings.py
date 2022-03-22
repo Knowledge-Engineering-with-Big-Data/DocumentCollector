@@ -1,4 +1,4 @@
-SearchKeys = ['limestone','dolomit*']
+SearchKeys = ['xxx','xxx']
 SaveFolder = 'results'
 dbName = 'db.sqlite'
 

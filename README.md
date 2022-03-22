@@ -10,12 +10,12 @@ A tool for information extraction from paper which get doi from website using ke
    ```bash
    git clone https://github.com/brillience/DocumentCollector.git
    cd DocumentCollector
-   conda install --yes --file requirements.txt
+   pip install -r requirements.txt
    ```
 
 1. Add search key words in settings.py.
-
-   ```python
+> Elsevier does not support wildcard searches, eg: `dolomit*`, so you should go to the website first to determine your search terms!
+```python
    SearchKeys = ['xxx', 'xxx', 'xxx']
    ```
 

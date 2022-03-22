@@ -22,7 +22,7 @@ class TestDoi(unittest.TestCase):
 
     def test_wiley(self):
         channel_name = '_wiley'
-        for searchKey in SearchKeys[0:1]:
+        for searchKey in SearchKeys:
             # TODO: why uuid didn't save into csv
             doi = Doi()
             doi.searchArticle(channel=WileyChannel(keyWord=searchKey))
