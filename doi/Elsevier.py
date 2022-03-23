@@ -82,6 +82,9 @@ class ElsevierChannel(Channel):
 
         response = requests.request("GET", url, headers=headers, data=payload)
         # print(response.text)
+        if response.status_code != 200:
+            time.sleep(5)
+            return self.__getPageContent(url)
         return response.json()
 
     def __parsePageContent(self, response: dict) -> List[ElsevierResultItem]:
