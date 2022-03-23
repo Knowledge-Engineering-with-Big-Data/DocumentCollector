@@ -96,14 +96,28 @@ class ElsevierChannel(Channel):
         for item in response['searchResults']:
             title = item['title']
             doi = ''
+            link = ''
+            pdfName = ''
+            articleType = ''
             try:
                 doi = item['doi']
             except Exception as e:
                 lg.error(str(e))
                 pass
-            link = item['pdf']['downloadLink']
-            pdfName = item['pdf']['filename']
-            articleType = item['articleTypeDisplayName']
+            try:
+                link = item['pdf']['downloadLink']
+            except Exception as e:
+                lg.error(str(e))
+            try:
+                pdfName = item['pdf']['filename']
+            except Exception as e:
+                lg.error(str(e))
+            try:
+                articleType = item['articleTypeDisplayName']
+            except Exception as e:
+                lg.error(str(e))
+            if doi=='':
+                continue
             results.append(ElsevierResultItem(title=title,doi=doi,link=link,pdfName=pdfName,articleType=articleType))
         return results
 
