@@ -3,6 +3,7 @@ from doi.Elsevier import ElsevierChannel
 from doi.CanadianScience import CanadianScienceChannel
 from doi.Wiley import WileyChannel
 from multiprocessing import Pool
+from log import lg
 
 from settings import SearchKeys, SavePath
 from doi.Doi import Doi
@@ -11,25 +12,34 @@ import os
 
 def GetDoi(searchKey):
 
-    channel_name = '_GeosicenceWorldChannel'
-    fileName = searchKey + channel_name + '.csv'
-    channel = GeosicenceWorldChannel(keyWord=searchKey)
-    doi = Doi(os.path.join(SavePath, fileName))
-    doi.searchArticle(channel=channel)
+    try:
+        channel_name = '_GeosicenceWorldChannel'
+        fileName = searchKey + channel_name + '.csv'
+        channel = GeosicenceWorldChannel(keyWord=searchKey)
+        doi = Doi(os.path.join(SavePath, fileName))
+        doi.searchArticle(channel=channel)
+    except Exception as e:
+        lg.error(str(e))
+
+    try:
+        channel_name = '_ElsevierChannel'
+        fileName = searchKey + channel_name + '.csv'
+        channel = ElsevierChannel(keyWord=searchKey)
+        doi = Doi(os.path.join(SavePath, fileName))
+        doi.searchArticle(channel=channel)
+    except Exception as e:
+        lg.error(str(e))
 
 
-    channel_name = '_ElsevierChannel'
-    fileName = searchKey + channel_name + '.csv'
-    channel = ElsevierChannel(keyWord=searchKey)
-    doi = Doi(os.path.join(SavePath, fileName))
-    doi.searchArticle(channel=channel)
+    try:
+        channel_name = '_CanadianScienceChannel'
+        fileName = searchKey + channel_name + '.csv'
+        channel = CanadianScienceChannel(keyWord=searchKey)
+        doi = Doi(os.path.join(SavePath, fileName))
+        doi.searchArticle(channel=channel)
+    except Exception as e:
+        lg.error(str(e))
 
-
-    channel_name = '_CanadianScienceChannel'
-    fileName = searchKey + channel_name + '.csv'
-    channel = CanadianScienceChannel(keyWord=searchKey)
-    doi = Doi(os.path.join(SavePath, fileName))
-    doi.searchArticle(channel=channel)
 
     # channel_name = '_WileyChannel'
     # fileName = searchKey + channel_name + '.csv'
