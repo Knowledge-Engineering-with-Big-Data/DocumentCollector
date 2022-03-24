@@ -32,13 +32,14 @@ class GeosicenceWorldChannel(Channel):
         :param delay: delay 15s when get page. Defaults to 15.
         :return:List[GeosicenceWorldResultItem]
         """
-        res = []
+        res = 0
         for url in self.__genUrls():
             r = self.__parseHtml(self.__getHtml(url))
-            res = res + r
-            lg.info("There are {} records left.".format(self.task_nums - len(res)))
+            for i in r:
+                yield i
+            res = res + len(r)
+            lg.info("There are {} records left.".format(self.task_nums - res))
             time.sleep(delay)
-        return res
         pass
 
     def __getTaskNum(self):

@@ -1,5 +1,4 @@
 from typing import List
-import uuid
 import hashlib
 from collections import defaultdict
 import csv
@@ -22,36 +21,36 @@ class Channel:
 
 class Doi:
 
-    def __init__(self) -> None:
-        self.doi = set()
-        self.uuid = defaultdict(str)
+    def __init__(self, path: str) -> None:
+        self.path = path
+        self.firstSave = True
 
     def searchArticle(self, channel: Channel) -> None:
-        results = channel.getSearchResults()
-        for item in results:
+        for item in channel.getSearchResults():
             doi = self.__foramtDoi(item.doi)
-            self.doi.add(doi)
-            self.__gen_uuid_of_doi(doi)
+            uuid = self.__gen_uuid_of_doi(doi)
+            self.__saveDoiUuid(doi,uuid)
 
     def __foramtDoi(self, doi: str) -> str:
         doi = doi.replace('https://doi.org/', '').replace('/doi/', '').replace('full/', '').replace('book/', '')
         return doi
 
-    def __gen_uuid_of_doi(self, doi: str) -> None:
+    def __gen_uuid_of_doi(self, doi: str) -> str:
         # self.uuid[doi] = str(uuid.uuid3(uuid.NAMESPACE_OID, doi))
         md5 = hashlib.md5()
         md5.update(doi.encode('utf-8'))
         res = md5.hexdigest()
-        self.uuid[doi] = res
+        return res
 
-    def saveDoiUuid(self, path: str):
+    def __saveDoiUuid(self, doi: str, uuid: str):
         header = ['doi', 'uuid']
         rows = []
-        for doi in self.doi:
-            if doi!=None and len(doi)>2:
-                rows.append([doi,self.uuid[doi]])
+        if doi != None and len(doi) > 2:
+            rows.append([doi, uuid])
         # rows = [[i, self.uuid[i]] for i in self.doi]
-        with open(path, 'w', encoding='utf-8', newline='') as f:
+        with open(self.path, 'a+', encoding='utf-8', newline='') as f:
             writer = csv.writer(f)
-            writer.writerow(header)
+            if self.firstSave == True:
+                writer.writerow(header)
+                self.firstSave = False
             writer.writerows(rows)

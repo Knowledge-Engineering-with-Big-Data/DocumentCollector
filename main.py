@@ -10,31 +10,32 @@ import os
 
 
 def GetDoi(searchKey):
-    doi = Doi()
 
     channel_name = '_GeosicenceWorldChannel'
-    channel = GeosicenceWorldChannel(keyWord=searchKey)
-    doi.searchArticle(channel=channel)
     fileName = searchKey + channel_name + '.csv'
-    doi.saveDoiUuid(path=os.path.join(SavePath, fileName))
+    channel = GeosicenceWorldChannel(keyWord=searchKey)
+    doi = Doi(os.path.join(SavePath, fileName))
+    doi.searchArticle(channel=channel)
+
 
     channel_name = '_ElsevierChannel'
-    channel = ElsevierChannel(keyWord=searchKey)
-    doi.searchArticle(channel=channel)
     fileName = searchKey + channel_name + '.csv'
-    doi.saveDoiUuid(path=os.path.join(SavePath, fileName))
+    channel = ElsevierChannel(keyWord=searchKey)
+    doi = Doi(os.path.join(SavePath, fileName))
+    doi.searchArticle(channel=channel)
+
 
     channel_name = '_CanadianScienceChannel'
-    channel = CanadianScienceChannel(keyWord=searchKey)
-    doi.searchArticle(channel=channel)
     fileName = searchKey + channel_name + '.csv'
-    doi.saveDoiUuid(path=os.path.join(SavePath, fileName))
+    channel = CanadianScienceChannel(keyWord=searchKey)
+    doi = Doi(os.path.join(SavePath, fileName))
+    doi.searchArticle(channel=channel)
 
     # channel_name = '_WileyChannel'
-    # channel = WileyChannel(keyWord=searchKey)
-    # doi.searchArticle(channel=channel)
     # fileName = searchKey + channel_name + '.csv'
-    # doi.saveDoiUuid(path=os.path.join(SavePath, fileName))
+    # channel = WileyChannel(keyWord=searchKey)
+    # doi = Doi(os.path.join(SavePath, fileName))
+    # doi.searchArticle(channel=channel)
 
 if __name__ =='__main__':
     pool = Pool(len(SearchKeys))

@@ -146,7 +146,7 @@ class ElsevierChannel(Channel):
         Returns:
             List[ElsevierResultItem]: [description]
         """
-        res = []
+        res = 0
         articleTypes = self.__get_article_type()
         lg.info("Already get article type!")
         task_nums = sum([int(i[1]) for i in articleTypes])
@@ -156,7 +156,8 @@ class ElsevierChannel(Channel):
             for url in urls:
                 content = self.__getPageContent(url)
                 results = self.__parsePageContent(content)
-                res = res + results
-                lg.info("There are {} records left.".format(task_nums-len(res)))
-                time.sleep(15)
-        return res
+                for i in results:
+                    yield i
+                res = res + len(results)
+                lg.info("There are {} records left.".format(task_nums-res))
+                time.sleep(delay)

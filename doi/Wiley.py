@@ -40,16 +40,18 @@ class WileyChannel(Channel):
         :param delay: delay 15s when get page. Defaults to 15.
         :return:List[WileyResultItem]
         """
-        res = []
+        res = 0
         urls = []
         for item in self.__getYearNums():
             start_year, end_year, nums = item[0], item[1], item[2]
             urls = urls + self.__genUrls(start_year=start_year, end_year=end_year, res_nums=nums)
         for url in urls:
-            res = res + self.__parsePage(self.__getHtml(url=url))
-            lg.info("There are {} records left.".format(self.task_nums - len(res)))
+            r = self.__parsePage(self.__getHtml(url=url))
+            for i in r:
+                yield i
+            res = res + len(r)
+            lg.info("There are {} records left.".format(self.task_nums - res))
             time.sleep(delay)
-        return res
 
     def __parsePage(self, response: str) -> List[WileyResultItem]:
         """
